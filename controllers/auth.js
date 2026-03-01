@@ -25,11 +25,12 @@ const sendTokenResponse = (user, statusCode, res) => {
 // @access   Public
 exports.register = async (req,res,next) => {
     try {
-        const {name, email, password, role} = req.body;
+        const {name, tel, email, password, role} = req.body;
 
         //create user
         const user = await User.create({
             name,
+            tel,
             email,
             password,
             role
@@ -86,7 +87,7 @@ exports.login = async (req,res,next) => {
 };
 
 // @desc     Get current Logged in user
-// @route    POST /api/v1/auath/me
+// @route    POST /api/v1/auth/me
 // @access   Private
 exports.getMe = async (req,res,next) => {
     const user = await User.findById(req.user.id);
